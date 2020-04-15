@@ -125,4 +125,6 @@ dmypy.json
 .pyre/
 
 # Mac
-.DS_Store 
+.DS_Store
+
+uploads/
