@@ -1,16 +1,12 @@
 from django.core.management.base import BaseCommand
 from rooms.models import Amenity
 
+NAME = "amenities"
+
 
 class Command(BaseCommand):
 
-    help = "This command creates amenities"
-
-    """     def add_arguments(self, parser):
-        parser.add_argument(
-            "--times", help="How many times do you want me to tell you that I love you?"
-        )
-        """
+    help = f"This command creates {NAME}"
 
     def handle(self, *args, **options):
         amenities = [
@@ -40,4 +36,4 @@ class Command(BaseCommand):
         ]
         for a in amenities:
             Amenity.objects.create(name=a)
-        self.stdout.write(self.style.SUCCESS(f"{len(amenities)} amenities created!"))
+        self.stdout.write(self.style.SUCCESS(f"{len(amenities)} {NAME} created!"))
