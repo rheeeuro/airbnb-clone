@@ -1,11 +1,29 @@
+from math import ceil
 from django.shortcuts import render
 from . import models
 
 
 def all_rooms(request):
-    page = int(request.GET.get("page", 1))
+    page = request.GET.get("page", 1)
+    page = int(page or 1)
     page_size = 10
     limit = page_size * page
     offset = limit - page_size
     all_rooms = models.Room.objects.all()[offset:limit]
-    return render(request, "rooms/home.html", context={"rooms": all_rooms})
+    page_count = ceil(models.Room.objects.count() / page_size)
+    page_start = page - page % 10
+    if page % 10 == 0:
+        page_start = page - 10
+    page_end = page_start + 10
+    return render(
+        request,
+        "rooms/home.html",
+        context={
+            "rooms": all_rooms,
+            "page": page,
+            "page_count": page_count,
+            "page_range": range(page_start + 1, page_end + 1),
+            "page_start": page_start,
+            "page_end": page_end,
+        },
+    )
