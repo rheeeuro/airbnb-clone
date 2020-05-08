@@ -1,32 +1,29 @@
 {% extends "base.html" %}
 
+
 {% block page_name %}
     Home
 {% endblock page_name %}
 
 {% block content %}
 
-    {% for room in rooms %}
-        <h4>{{room.name}} / {{room.price}}원</h4>
+    {% for room in page.object_list  %}
+        <h5>{{room.name}} / {{room.price}}원</h1>
     {% endfor %}
 
-    <h5>{{page_count}} 페이지 중 {{page}} 페이지</h5>
-    
-    <a href="?page=1"><<</a>
-    
-    {% if page > 10 %}
-        <a href="?page={{page_end|add:-10}}"><</a>
+    <h5>
+    {% if page.has_previous %}
+        <a href="?page={{page.previous_page_number}}">이전</a>
     {% endif %}
 
-    {% for page in page_range %}
-        {% if page <= page_count%}
-            <a href="?page={{page}}">{{page}}</a>
-        {% endif %}
-    {% endfor %}
-
-    {% if page_end < page_count %}
-        <a href="?page={{page_end|add:1}}">></a>
+    {{page.number}} / {{page.paginator.num_pages}}
+    
+    {% if page.has_next  %}
+        <a href="?page={{page.next_page_number}}">다음</a>
     {% endif %}
 
-    <a href="?page={{page_count}}">>></a>
-{% endblock content%}
+
+    </h5>
+
+
+{% endblock content %}
