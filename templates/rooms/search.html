@@ -37,6 +37,75 @@
             {% endfor %}
             </select>
         </div>
+
+        <div>
+            <label for="price">가격</label>
+            <input value={{price}} type="number" name="price" id="price" placeholder="가격" />
+        </div>
+        <div>
+            <label for="guests">인원</label>
+            <input value={{guests}} type="number" name="guests" id="guests" placeholder="인원" />
+        </div>
+        <div>
+            <label for="bedrooms">화장실 수</label>
+            <input value={{bedrooms}} type="number" name="bedrooms" id="bedrooms" placeholder="화장실 수" />
+        </div>
+        <div>
+            <label for="beds">침대 수</label>
+            <input value={{beds}} type="number" name="beds" id="beds" placeholder="침대 수" />
+        </div>
+        <div>
+            <label for="baths">욕실 수</label>
+            <input value={{baths}} type="number" name="baths" id="baths" placeholder="욕실 수" />
+        </div>
+        </div>
+        <div>
+            <label for="instant">즉시 예약</label>
+            <input type="checkbox" name="instant" id="instant" {% if instant %}checked{% endif %} />
+        </div>
+        </div>
+        <div>
+            <label for="superhost">슈퍼호스트</label>
+            <input type="checkbox" name="superhost" id="superhost" {% if superhost %}checked{% endif %} />
+        </div>
+        <div>
+            <h3>편의시설</h3>
+            <ul>
+                {% for amenity in amenities %}
+                    <li>
+                        <label for="a_{{amenity.pk}}">{{amenity.name}}</label>
+                        <input 
+                            id="a_{{amenity.pk}}" 
+                            name="amenities" 
+                            type="checkbox" 
+                            value="{{amenity.pk}}"
+                            {% if amenity.pk|slugify in s_amenities %}
+                                checked
+                            {% endif %}
+                        />
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h3>시설</h3>
+            <ul>
+                {% for facility in facilities %}
+                    <li>
+                        <label for="f_{{facility.pk}}">{{facility.name}}</label>
+                        <input 
+                            id="f_{{facility.pk}}" 
+                            name="facilities" 
+                            type="checkbox" 
+                            value="{{facility.pk}}"
+                            {% if facility.pk|slugify in s_facilities %}
+                                checked
+                            {% endif %}    
+                        />
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         <button>검색</button>
     </form>
 {% endblock content %}
