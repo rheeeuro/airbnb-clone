@@ -108,4 +108,9 @@
         </div>
         <button>검색</button>
     </form>
+
+    <h3>검색결과</h3>
+    {% for room in rooms %}
+        <h5>{{room.name}}</h5>
+    {% endfor %}
 {% endblock content %}
