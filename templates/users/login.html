@@ -5,5 +5,9 @@
 {% endblock page_title%}
 
 {% block content %}
-    Helo!
+    <form method="POST" action="{% url "users:login" %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button>로그인</button>
+    </form>
 {% endblock content %}
